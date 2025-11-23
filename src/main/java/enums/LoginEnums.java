@@ -1,31 +1,33 @@
 package enums;
 
-import lombok.Getter;
 import org.openqa.selenium.By;
-@Getter
-public enum Login {
 
+public enum LoginEnums {
 
+    USERNAME_FIELD("//input[@name='username']"),
+    PASSWORD_FILED("//input[@name='password']"),
+    SUBMIT("//button[@type='submit']"),
+    HOMEPAGEICON("//img[@alt='client brand banner']");
 
     private final String xpath;
 
-    Login(String xpath) {
+    LoginEnums(String xpath) {
         this.xpath = xpath;
     }
 
-
-    // Method to format xpath with dynamic values
-    public String getXpath(String... values) {
-        return String.format(xpath, values);
+    public String getXpath() {
+        return xpath;
     }
 
-    // Method to get By locator
+    public String getXpath(String... values) {
+        return String.format(xpath, (Object[]) values);
+    }
+
     public By getLocator() {
         return By.xpath(xpath);
     }
 
-    // Method to get By locator with dynamic values
     public By getLocator(String... values) {
-        return By.xpath(String.format(xpath, values));
+        return By.xpath(String.format(xpath, (Object[]) values));
     }
 }
