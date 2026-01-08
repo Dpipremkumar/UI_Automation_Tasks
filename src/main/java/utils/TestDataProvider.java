@@ -21,11 +21,19 @@ public class TestDataProvider {
     }
 
     public static String getValue(String key) {
+        // 1️⃣ Read from VM options (-Dkey=value)
+        String sysValue = System.getProperty(key);
+
+        if (sysValue != null && !sysValue.isEmpty()) {
+            return sysValue;
+        }
+
+        // 2️⃣ Fallback to properties file
         return properties.getProperty(key);
     }
 
     public static int getInt(String key) {
-        return Integer.parseInt(properties.getProperty(key));
+        return Integer.parseInt(getValue(key));
     }
 
     @DataProvider(name = "loginuser")
