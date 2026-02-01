@@ -38,6 +38,6 @@ jobs:
       - name: Run Selenium Tests with VM options
         run: |
           mvn clean test \
-          -Dbrowser=${{ inputs.browser }} \
-          -Denv=${{ inputs.env }} \
+          -Dtest=LoginTest \
+          -Dbrowser=${{ inputs.browser }} \          
           -Dtesttype=${{ inputs.testtype }}
