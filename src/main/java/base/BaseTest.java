@@ -3,6 +3,7 @@ package base;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterMethod;
@@ -29,22 +30,27 @@ public class BaseTest {
             switch (browser) {
                 case "chrome" -> {
                     WebDriverManager.chromedriver().setup();
+
                     ChromeOptions options = new ChromeOptions();
-                    options.addArguments("--headless=new");
+                    options.addArguments("--headless=new"); // Required for GitHub Actions
                     options.addArguments("--no-sandbox");
                     options.addArguments("--disable-dev-shm-usage");
                     options.addArguments("--remote-allow-origins=*");
                     options.addArguments("--window-size=1920,1080");
-                    webDriver = new ChromeDriver();
+
+                    webDriver = new ChromeDriver(options);
                 }
+
                 case "firefox" -> {
                     WebDriverManager.firefoxdriver().setup();
                     webDriver = new FirefoxDriver();
                 }
+
                 case "edge" -> {
                     WebDriverManager.edgedriver().setup();
                     webDriver = new EdgeDriver();
                 }
+
                 default -> throw new RuntimeException("Unsupported browser: " + browser);
             }
 
@@ -64,5 +70,4 @@ public class BaseTest {
             driver.remove();
         }
     }
-
 }
