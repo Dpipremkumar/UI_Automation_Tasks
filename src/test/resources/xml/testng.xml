@@ -3,6 +3,7 @@
     <test name="LoginTests">
         <classes>
             <class name="com.tests.LoginTest"/>
+            <class name="com.tests.ConvertToNumericValue"/>
         </classes>
     </test>
 </suite>
